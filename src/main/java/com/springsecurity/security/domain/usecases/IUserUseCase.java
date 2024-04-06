@@ -1,6 +1,7 @@
 package com.springsecurity.security.domain.usecases;
 
 import com.springsecurity.security.domain.dto.AuthRequestLogInDto;
+import com.springsecurity.security.domain.dto.AuthRequestSignUpDto;
 import com.springsecurity.security.domain.dto.AuthResponseDto;
 import com.springsecurity.security.persistence.entities.UserEntity;
 
@@ -20,4 +21,6 @@ public interface IUserUseCase {
     void delete(Long id);
 
     AuthResponseDto logIn(AuthRequestLogInDto authRequestLogInDto);
+
+    AuthResponseDto signUp(AuthRequestSignUpDto authRequestSignUpDto);
 }

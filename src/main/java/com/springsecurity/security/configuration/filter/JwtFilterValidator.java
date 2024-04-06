@@ -1,6 +1,7 @@
 package com.springsecurity.security.configuration.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.springsecurity.security.exception.Security.UnauthorizedException;
 import com.springsecurity.security.util.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

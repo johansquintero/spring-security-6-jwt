@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.springsecurity.security.exception.Security.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -48,7 +49,7 @@ public class JwtUtils {
             JWTVerifier verifier = JWT.require(algorithm).withIssuer(this.userGenerator).build();
             return verifier.verify(token);
         } catch (JWTVerificationException e) {
-            throw new JWTVerificationException("token invalid, not authorized");
+            throw new UnauthorizedException("Token invalid, not authorized");
         }
     }
 
@@ -59,7 +60,7 @@ public class JwtUtils {
         return decodedJWT.getClaim(clameName);
     }
 
-    public Map<String,Claim> getSpecificClaim(DecodedJWT decodedJWT){
+    public Map<String,Claim> getClaims(DecodedJWT decodedJWT){
         return decodedJWT.getClaims();
     }
 }

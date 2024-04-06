@@ -2,11 +2,11 @@ package com.springsecurity.security.domain.repositories;
 
 import com.springsecurity.security.persistence.entities.UserEntity;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface IUserRepository {
-    Iterable<UserEntity> findAll();
+    List<UserEntity> findAll();
 
     Optional<UserEntity> findById(Long id);
 

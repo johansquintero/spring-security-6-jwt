@@ -1,6 +1,7 @@
 package com.springsecurity.security.controllers;
 
 import com.springsecurity.security.domain.dto.AuthRequestLogInDto;
+import com.springsecurity.security.domain.dto.AuthRequestSignUpDto;
 import com.springsecurity.security.domain.dto.AuthResponseDto;
 import com.springsecurity.security.domain.usecases.IUserUseCase;
 import jakarta.validation.Valid;
@@ -21,5 +22,10 @@ public class AuthController {
     @PostMapping(path = "/log-in")
     public ResponseEntity<AuthResponseDto> logIn(@RequestBody @Valid AuthRequestLogInDto authRequestLogInDto){
         return ResponseEntity.ok(this.userService.logIn(authRequestLogInDto));
+    }
+
+    @PostMapping(path = "/sign-up")
+    public ResponseEntity<AuthResponseDto> signUp(@RequestBody @Valid AuthRequestSignUpDto authRequestSignUpDto){
+        return ResponseEntity.ok(this.userService.signUp(authRequestSignUpDto));
     }
 }

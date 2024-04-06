@@ -1,7 +1,9 @@
 package com.springsecurity.security.domain.services;
 
 import com.springsecurity.security.domain.repositories.IUserRepository;
+import com.springsecurity.security.exception.ErrorAlertMessages;
 import com.springsecurity.security.persistence.entities.UserEntity;
+import jakarta.validation.ValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,7 +23,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = this.repository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("El usuario no existe en la base de datos"));
+        UserEntity userEntity = this.repository.findByUsername(username)
+                .orElseThrow(() -> new ValidationException(ErrorAlertMessages.USER_NOT_EXISTS_MESSAGE));
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         userEntity.getRoles().forEach(roleEntity ->
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_".concat(roleEntity.getRoleEnum().name())))
